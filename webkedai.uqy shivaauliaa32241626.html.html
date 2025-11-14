@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>kedai.uqy - ShopSmart</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* CSS Disesuaikan */
+:root {
+  --tokopedia-green: #03ac0e;
+  --light-gray: #f8f9fa;
+  --rating-color: #ffc107;
+  --gofood-red: #FA2A55; 
+  --deep-red: #B00020; 
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--light-gray);
+}
+
+html {
+  scroll-padding-top: 60px; 
+}
+
+/* Navbar */
+.navbar {
+  background-color: var(--tokopedia-green);
+  z-index: 1020; 
+}
+.navbar-brand {
+  color: white !important;
+  font-weight: 700;
+  font-size: 1.8rem;
+}
+.nav-link {
+  color: white !important;
+  font-weight: 500;
+  transition: 0.3s;
+}
+.nav-link:hover {
+  text-shadow: 0 0 6px white;
+}
+
+/* Header */
+header {
+  background: linear-gradient(90deg, #03d40f, #03ac0e);
+  color: white;
+  padding: 60px 20px 40px 20px; 
+  text-align: center;
+  position: relative;
+}
+header .header-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+header .header-content img {
+  height: 210px; 
+  width: auto;
+  object-fit: contain;
+  border-radius: 50%;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.8);
+}
+header h1 {
+  font-weight: 700;
+  font-size: 2.3rem;
+  text-shadow: 0 0 12px #7fff7f;
+  color: #fff;
+  margin: 0;
+}
+
+/* DETAIL USAHA (INFO KAMI) Styling di dalam HEADER */
+.shop-details-container {
+    margin-top: 30px;
+}
+.shop-details-container .card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); 
+    transition: transform 0.2s;
+    height: 100%;
+    text-align: left; 
+    color: #333; 
+}
+.shop-details-container .card-body {
+    padding: 15px;
+}
+.shop-details-container .card-title {
+    font-weight: 700;
+    font-size: 1.0rem;
+    color: var(--tokopedia-green); 
+    margin-bottom: 5px;
+}
+.info-icon {
+    font-size: 1.5rem;
+    color: var(--deep-red); 
+    margin-right: 8px;
+}
+.status-indicator {
+    font-weight: 700;
+    color: var(--deep-red) !important; 
+}
+
+/* Kartu Produk (List) */
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+.card-img-top {
+  height: 250px; 
+  object-fit: contain; 
+  background-color: #fff;
+  padding: 12px;
+}
+
+/* CSS Baru untuk Gambar di dalam Modal Detail Produk */
+.modal-product-img {
+    width: 100%; /* Memastikan lebar maksimal di modal */
+    max-height: 280px; /* Menetapkan tinggi maksimal agar tidak terlalu besar */
+    object-fit: contain; /* Memastikan gambar tidak terpotong dan proporsional */
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #f8f8f8;
+}
+
+.terjual-text {
+    font-size: 0.85rem;
+    color: #6c757d; 
+    margin-top: -5px; 
+    margin-bottom: 8px;
+    border-top: 1px solid #eee;
+    padding-top: 5px;
+}
+.rating {
+    color: var(--rating-color);
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+.rating .text-muted {
+    font-size: 0.9rem;
+}
+
+/* Tombol Tokopedia untuk 'Detail Produk' dan 'Tambah ke Keranjang' */
+.btn-tokopedia {
+    background-color: var(--tokopedia-green);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 10px 15px;
+    font-weight: 600;
+    transition: background-color 0.2s;
+}
+.btn-tokopedia:hover {
+    background-color: #038a0e;
+    color: white;
+}
+
+/* CSS untuk tampilan tautan sederhana ('Lihat Semua Produk') */
+.simple-link {
+    color: var(--tokopedia-green); 
+    font-weight: 600;
+    text-decoration: none;
+    padding: 5px 10px;
+    transition: color 0.2s;
+}
+.simple-link:hover {
+    color: #038a0e;
+    text-decoration: underline;
+}
+
+/* CSS Keranjang dan Modal (Dipertahankan) */
+.qty-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 0;
+}
+.qty-btn {
+    background-color: var(--tokopedia-green);
+    color: white;
+    border: none;
+    padding: 5px 12px; 
+    font-size: 1.1rem; 
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+    height: 38px; 
+    line-height: 1;
+}
+.qty-btn:hover {
+    background-color: #038a0e;
+}
+.qty-input {
+    width: 60px; 
+    text-align: center;
+    border: 1px solid #ccc;
+    height: 38px;
+    font-size: 1rem;
+    margin: 0 5px;
+}
+.btn-delete {
+    background: none;
+    border: none;
+    color: #dc3545;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-left: 10px;
+}
+.cart-item-card {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+.cart-item-card img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    border-radius: 4px;
+    margin-right: 15px;
+    padding: 5px;
+    background-color: #f8f8f8;
+}
+.cart-item-info {
+    flex-grow: 1;
+    text-align: left;
+}
+.cart-item-name {
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+.cart-item-details {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+.cart-item-actions {
+    display: flex;
+    align-items: center;
+}
+.total-summary {
+    text-align: right;
+    width: 100%;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 2px solid #ccc;
+}
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+.summary-label {
+    font-weight: 500;
+    color: #495057;
+}
+.summary-value {
+    font-weight: 600;
+    color: #333;
+}
+.summary-total {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--tokopedia-green);
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #ccc;
+}
+</style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark shadow-sm sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">kedai.uqy</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarShop">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarShop">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#shop-details">Info Kami</a></li> 
+        <li class="nav-item"><a class="nav-link" href="#produk">Produk</a></li>
+        <li class="nav-item"><a class="nav-link" href="#keranjang">Keranjang</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<header id="shop-details">
+  <div class="header-content">
+    <img src="https://i.imgur.com/gCpMriy.jpeg" alt="Logo kedai.uqy">
+    <div>
+      <h1>Selamat Datang di kedai.uqy 🛒</h1>
+      <p>Pesan Mudah, Nikmat Cepat Satset, Rasa Autentik, Harga Terbaik</p>
+
+      <div class="promo-box mt-3">
+        <h2>Promo Spesial Bulan Ini 🎉</h2>
+        <p>Nikmati diskon hingga <span class="fw-bold text-warning">50%</span> untuk produk pilihan!</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container shop-details-container">
+      <div class="row g-3 justify-content-center">
+          
+          <div class="col-lg-4 col-md-6">
+              <div class="card bg-white text-dark shadow-lg">
+                  <div class="card-body">
+                      <div class="d-flex align-items-center mb-2">
+                          <i class="fas fa-store info-icon"></i> 
+                          <h5 class="card-title mb-0">Informasi Dasar</h5>
+                      </div>
+                      <p class="mb-1 fw-medium">Rating: 4.7 <i class="fas fa-star" style="color: var(--rating-color);"></i></p>
+                      <p class="mb-1"><small>Kategori: Makanan Rumahan, Minuman Sehat</small></p>
+                      <p class="mb-0"><small>Didirikan Sejak: 2020 | Area: Kota Cirebon</small></p>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6">
+              <div class="card bg-white text-dark shadow-lg">
+                  <div class="card-body">
+                      <div class="d-flex align-items-center mb-2">
+                          <i class="fas fa-clock info-icon"></i> 
+                          <h5 class="card-title mb-0">Jam Buka</h5>
+                      </div>
+                      <p class="mb-1">
+                          Status Saat Ini: <span id="statusToko" class="status-indicator">Memuat...</span>
+                      </p>
+                      <p class="mb-1"><small>Hari: Senin - Minggu</small></p>
+                      <p class="mb-0"><small>Waktu: 01:00 - 21:00 WIB</small></p>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-lg-4 col-md-12">
+              <div class="card bg-white text-dark shadow-lg">
+                  <div class="card-body">
+                      <div class="d-flex align-items-center mb-2">
+                          <i class="fas fa-wallet info-icon"></i> 
+                          <h5 class="card-title mb-0">Pembayaran</h5>
+                      </div>
+                      <p class="mb-1 fw-medium">Tunai: Ya (COD) | Non-Tunai: Ya</p>
+                      <div class="mt-2">
+                          <i class="fab fa-cc-visa fa-2x text-primary me-2"></i>
+                          <i class="fab fa-cc-mastercard fa-2x text-danger me-2"></i>
+                          <i class="fas fa-credit-card fa-2x text-secondary"></i>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+      </div>
+  </div>
+</header>
+
+
+<div class="section-divider"></div>
+
+<section id="produk" class="container py-5">
+  <h2 class="section-title text-center">Produk Terlaris</h2>
+  <div class="row g-4 justify-content-center" id="produkTerlaris"></div>
+  <div class="text-center mt-4">
+    <a href="#produk-lainnya" class="simple-link">Lihat Semua Produk ↓</a>
+  </div>
+</section>
+
+<section id="produk-lainnya" class="container py-5">
+  <h2 class="section-title text-center">Produk Lainnya</h2>
+  <div class="row g-4 justify-content-center" id="produkLainnya"></div>
+</section>
+
+<div class="section-divider"></div>
+
+<section id="keranjang" class="container py-5 text-center">
+  <h2 class="section-title mb-4">Keranjang Belanja</h2>
+  
+  <h5 class="text-primary fw-bold mb-3" id="rangkumanPesananTitle">Rangkuman Pesanan</h5>
+  
+  <p class="text-muted" id="keranjangKosong">Belum ada barang di keranjangmu 😅</p>
+  <div id="daftarKeranjang" class="col-lg-8 mx-auto">
+      </div>
+  
+  <div id="totalSummaryContainer" class="col-lg-6 mx-auto d-none">
+      <div class="total-summary">
+          <div class="summary-row">
+              <span class="summary-label">Subtotal Produk</span>
+              <span class="summary-value" id="summarySubtotal">Rp 0</span>
+          </div>
+          <div class="summary-row">
+              <span class="summary-label">Ongkos Kirim</span>
+              <span class="summary-value" id="summaryOngkir">Rp 0</span> 
+          </div>
+          <div class="summary-row">
+              <span class="summary-label">Biaya Kemasan</span>
+              <span class="summary-value" id="summaryKemasan">Rp 2.000</span>
+          </div>
+          <div class="summary-row summary-total">
+              <span class="summary-label">TOTAL AKHIR</span>
+              <span class="summary-value" id="summaryTotalAkhir">Rp 0</span>
+          </div>
+      </div>
+  </div>
+  
+  <div id="checkoutForm" class="mt-4 text-start p-3 border rounded shadow-sm d-none col-lg-8 mx-auto">
+      <h5 class="fw-bold text-success mb-3">Detail Pengiriman & Pembayaran</h5>
+
+      <div class="mb-3">
+          <label for="namaPemesan" class="form-label">Nama Lengkap <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="namaPemesan" placeholder="Contoh: Budi Santoso" required>
+      </div>
+      
+      <div class="mb-3">
+          <label for="alamatPengiriman" class="form-label">Alamat Pengiriman Lengkap <span class="text-danger">*</span></label>
+          <textarea class="form-control" id="alamatPengiriman" rows="2" placeholder="Contoh: Jalan Raya No. 12, RT 01/RW 02, Kel. Kejaksan, Kota Cirebon, Jawa Barat" required></textarea>
+      </div>
+      
+      <div class="mb-3 p-3 bg-light rounded border">
+          <label for="kodePromoInput" class="form-label fw-bold"><i class="fas fa-gift me-2 text-info"></i>Kode Promo/Voucher</label>
+          <div class="input-group">
+              <input type="text" class="form-control" id="kodePromoInput" placeholder="Masukkan kode promo manual">
+              <button class="btn btn-outline-secondary" type="button" id="applyPromo">Terapkan</button>
+          </div>
+          <small class="form-text text-success d-none" id="promoStatus">Promo berhasil diterapkan!</small>
+          <small class="form-text text-info mt-1" id="infoVoucherOtomatis">
+              Saat ini: *Potongan Otomatis Rp 10.000* jika Subtotal Produk ≥ Rp 100.000.
+          </small>
+      </div>
+
+      <div class="mb-3">
+          <label for="metodePembayaran" class="form-label">Metode Pembayaran <span class="text-danger">*</span></label>
+          <select class="form-select" id="metodePembayaran" required>
+              <option value="" selected disabled>Pilih Metode Pembayaran</option>
+              <option value="Transfer Bank (BCA/Mandiri)">Transfer Bank (BCA/Mandiri)</option>
+              <option value="E-Wallet (Dana/Gopay/OVO)">E-Wallet (Dana/Gopay/OVO)</option>
+              <option value="COD (Bayar di tempat)">COD (Bayar di tempat)</option>
+          </select>
+      </div>
+  </div>
+  <a href="#produk" class="simple-link mt-3" id="btnBelanjaLagi">Mulai Belanja</a>
+  
+  <button class="btn btn-success mt-3 d-none" id="btnCheckout" onclick="konfirmasiCheckout()">
+    Konfirmasi Pesanan via WhatsApp
+  </button>
+</section>
+
+<div class="modal fade" id="detailModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <img id="modalImg" src="" alt="Produk" class="modal-product-img"> 
+        <h5 id="modalNama" class="mt-3"></h5>
+        <p id="modalDeskripsi" class="text-muted"></p>
+        <p id="modalHarga" class="fw-bold text-success"></p>
+        
+        <div id="varianContainer" class="mb-3 d-none">
+            <label for="varianSelect" class="form-label fw-bold">Pilih Isian:</label>
+            <select id="varianSelect" class="form-select"></select>
+        </div>
+
+        <div class="qty-container">
+          <button class="qty-btn" id="qtyMinus">-</button>
+          <input type="text" id="qtyInput" value="1" class="qty-input" readonly>
+          <button class="qty-btn" id="qtyPlus">+</button>
+        </div>
+        
+        <button class="btn btn-success w-100 mt-2" id="tambahKeranjang">Tambah ke Keranjang</button>
+      </div>
+    </div>
+  </div>
+</div>
+<footer class="text-center py-3 border-top bg-light">
+  <div class="container">
+    <div class="footer-info"> 
+        <p>&copy; <span id="year"></span> @kedai.uqy | dibuat oleh: Shiva Aulia Azahra (32241626)</p>
+    </div>
+  </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+// ==============================================
+// ⚙️ KONSTANTA DAN VARIABEL GLOBAL
+// ==============================================
+const BIAYA_KEMASAN = 2000;
+let ONGKOS_KIRIM = 15000; 
+let DISKON_PROMO = 0; 
+let kodePromoDiterapkan = null; 
+let subtotalProdukGlobal = 0; 
+
+// DOM Elements
+const alamatPengirimanElement = document.getElementById('alamatPengiriman');
+const summaryOngkir = document.getElementById('summaryOngkir');
+const summarySubtotal = document.getElementById('summarySubtotal');
+const summaryTotalAkhir = document.getElementById('summaryTotalAkhir');
+const promoStatusElement = document.getElementById('promoStatus');
+const infoVoucherOtomatisElement = document.getElementById('infoVoucherOtomatis'); 
+const rowTerlaris = document.getElementById('produkTerlaris');
+const rowLainnya = document.getElementById('produkLainnya');
+const daftarKeranjang = document.getElementById('daftarKeranjang');
+const keranjangKosong = document.getElementById('keranjangKosong');
+const totalSummaryContainer = document.getElementById('totalSummaryContainer');
+const checkoutFormElement = document.getElementById('checkoutForm');
+const btnCheckoutElement = document.getElementById('btnCheckout');
+const rangkumanPesananTitle = document.getElementById('rangkumanPesananTitle');
+const modal = document.getElementById('detailModal');
+const qtyInput = document.getElementById('qtyInput');
+const varianSelect = document.getElementById('varianSelect');
+
+let produkDipilih = null;
+let keranjang = [];
+let groupedItems = {}; 
+
+// ==============================================
+// 🛠️ FUNGSI UTILITY
+// ==============================================
+
+function parseHarga(hargaString) {
+    let bersih = hargaString.replace('Rp ', '').replace(/\./g, '').replace('/pcs', '');
+    return parseInt(bersih) || 0;
+}
+
+function formatRupiah(angka) {
+    let reverse = angka.toString().split('').reverse().join('');
+    let ribuan = reverse.match(/\d{1,3}/g);
+    let hasil = ribuan.join('.').split('').reverse().join('');
+    return 'Rp ' + hasil;
+}
+
+function getRatingHtml(rating) {
+    let stars = '';
+    const fullStar = '★'; 
+    const emptyStar = '☆'; 
+    const roundedRating = Math.round(rating); 
+    for (let i = 1; i <= 5; i++) {
+        stars += (i <= roundedRating) ? fullStar : emptyStar;
+    }
+    return `<div class="rating"><span class="stars">${stars}</span> <span class="text-muted">(${rating.toFixed(1)}/5)</span></div>`;
+}
+
+function checkStatusToko() {
+    const statusElement = document.getElementById('statusToko');
+    if (!statusElement) return;
+
+    const jamBuka = 8;    
+    const jamTutup = 18;  
+    const hariTutup = 0; 
+
+    const now = new Date();
+    const currentHour = now.getHours();
+    const currentDay = now.getDay(); 
+
+    if (currentDay === hariTutup) {
+        statusElement.textContent = 'Sedang Tutup (Hari Minggu)';
+        return;
+    }
+    
+    if (currentHour >= jamBuka && currentHour < jamTutup) {
+        statusElement.textContent = 'Saat Ini: Buka';
+    } else {
+        statusElement.textContent = 'Sedang Tutup';
+    }
+}
+
+
+// ==============================================
+// 📦 DATA PRODUK (URL gambar sudah dipastikan unik)
+// ==============================================
+const produkTerlarisData = [
+  {nama:"Ikan Nila Cobek", harga:"Rp 20.000", img:"https://i.imgur.com/aOm72zf.jpeg", deskripsi: "Ikan Nila goreng disajikan dengan sambal cobek pedas khas Sunda.", rating: 4.8, terjual: 156},
+  {nama:"Ikan Garang Asem", harga:"Rp 35.000", img:"https://i.imgur.com/l7iclkx.jpeg", deskripsi: "Ikan bandeng/patin dimasak kuah santan kaya rempah dengan rasa asam pedas menyegarkan.", rating: 4.5, terjual: 92},
+  {nama:"Acar Ikan Merah", harga:"Rp 20.000", img:"https://i.imgur.com/2LM3DDx.jpeg", deskripsi: "Olahan ikan dengan kuah kuning pedas dan bumbu acar.", rating: 4.7, terjual: 110}
+];
+
+const produkLainnyaData = [
+  {nama:"Jamu Kunyit", harga:"Rp 8.000", img:"https://i.imgur.com/9wk7ozz.jpeg", deskripsi: "Jamu segar kunyit asam, baik untuk daya tahan tubuh dan pencernaan.", varians: ["Original", "Madu"], rating: 4.9, terjual: 245},
+  {nama:"Bunga Telang Lemon Selasih", harga:"Rp 15.000", img:"https://i.imgur.com/KAAghpO.jpeg", deskripsi: "Jamu herbal tradisional dengan tambahan lemon dan biji selasih untuk kesegaran.", rating: 4.2, terjual: 60},
+  {nama:"Jamu Lemon Selasih", harga:"Rp 8.000", img:"https://i.imgur.com/EldV4Cu.jpeg", deskripsi: "Minuman menyehatkan dari bunga telang yang cantik, dicampur lemon dan selasih.", rating: 4.3, terjual: 75},
+  {nama:"Gabin Tape Susu", harga:"Rp 3.000/pcs", img:"https://i.imgur.com/XwYCbAj.jpeg", deskripsi: "Snack tradisional dengan isian tape singkong manis dan susu.", rating: 4.6, terjual: 188},
+  {nama:"Risoles", harga:"Rp 20.000", img:"https://i.imgur.com/3Ypkw3V.jpeg", deskripsi: "Risoles fozenfood dengan berbagai pilihan isian (1pack=5pcs)", varians: ["Mayo", "Mentai", "Sayuran"], rating: 4.5, terjual: 140},
+  {nama:"Cireng isi", harga:"Rp 20.000", img:"https://i.imgur.com/BukBWmQ.jpeg", deskripsi: "Cireng isi frozenfood cocok untuk cemilan (1pack=5pcs)", varians: ["Ayam Suwir Pedas", "Ayam Suwir Tidak Pedas"], rating: 4.7, terjual: 205},
+  {nama:"Keripik Tempe", harga:"Rp 28.000", img:"https://i.imgur.com/Av2s1ba.jpeg", deskripsi: "Keripik tempe renyah, gurih, dan siap makan.", rating: 4.4, terjual: 85},
+  {nama:"Peyek Rebon", harga:"Rp 30.000", img:"https://i.imgur.com/O4DCBQr.jpeg", deskripsi: "Peyek rebon super renyah yang kaya rasa udang rebon (udang kecil).", rating: 4.8, terjual: 132}
+];
+
+const allProdukData = [...produkTerlarisData, ...produkLainnyaData];
+function getProductImage(productName) {
+    const product = allProdukData.find(p => p.nama === productName);
+    return product ? product.img : 'https://i.imgur.com/gCpMriy.jpeg'; 
+}
+// ==============================================
+// 🛒 FUNGSI KERANJANG
+// ==============================================
+
+function renderProduk(container, data, perRow=4){
+  data.forEach(p=>{
+    const col = document.createElement('div');
+    col.className="col-lg-"+(12/perRow)+" col-md-4 col-sm-6";
+    
+    // Data attributes untuk modal
+    let dataAttributes = `data-nama="${p.nama}" data-harga="${p.harga}" data-img="${p.img}" data-deskripsi="${p.deskripsi}"`;
+    if (p.varians) {
+        dataAttributes += ` data-varians='${JSON.stringify(p.varians)}'`;
+    }
+
+    const ratingHtml = p.rating ? getRatingHtml(p.rating) : '';
+    const terjualHtml = p.terjual ? `<p class="terjual-text">Telah terjual: ${p.terjual}x</p>` : '';
+
+    col.innerHTML=`
+      <div class="card card-hover border-0 shadow-sm h-100">
+        <img src="${p.img}" class="card-img-top" alt="${p.nama}">
+        <div class="card-body text-center">
+          ${ratingHtml} 
+          <h5 class="card-title fw-bold">${p.nama}</h5>
+          <p class="text-success fw-semibold">${p.harga}</p>
+          ${terjualHtml}
+          <button class="btn btn-tokopedia w-100" data-bs-toggle="modal" data-bs-target="#detailModal" ${dataAttributes}>Detail Produk</button>
+        </div>
+      </div>`;
+    container.appendChild(col);
+  });
+}
+
+function updateOngkosKirim() {
+    let alamat = alamatPengirimanElement.value.toLowerCase();
+    
+    ONGKOS_KIRIM = 15000;
+    
+    if (alamat.includes('kabupaten cirebon')) {
+        ONGKOS_KIRIM = 5000;
+    } 
+    else if (alamat.includes('kota cirebon') || alamat.includes('cirebon') ) {
+        ONGKOS_KIRIM = 10000;
+    }
+    
+    summaryOngkir.textContent = formatRupiah(ONGKOS_KIRIM);
+}
+
+function applyOtomatisDiskon() {
+    // Jika promo manual sedang diterapkan, jangan jalankan promo otomatis
+    if (kodePromoDiterapkan && kodePromoDiterapkan !== "VOUCHER OTOMATIS") {
+        infoVoucherOtomatisElement.classList.add('d-none'); // Sembunyikan info otomatis saat manual aktif
+        return; 
+    }
+    
+    DISKON_PROMO = 0;
+    kodePromoDiterapkan = null;
+    
+    if (subtotalProdukGlobal >= 100000) {
+        DISKON_PROMO = 10000; 
+        kodePromoDiterapkan = "VOUCHER OTOMATIS";
+        promoStatusElement.textContent = `Voucher Otomatis Rp 10.000 (Subtotal ≥ Rp 100.000) berhasil diterapkan!`;
+        promoStatusElement.classList.remove('d-none');
+        promoStatusElement.classList.remove('text-danger');
+        promoStatusElement.classList.add('text-success');
+        infoVoucherOtomatisElement.classList.remove('d-none'); // Tampilkan info otomatis
+    } else {
+        // Jika tidak memenuhi syarat otomatis, sembunyikan status promo dan tampilkan info otomatis
+        promoStatusElement.classList.add('d-none');
+        infoVoucherOtomatisElement.classList.remove('d-none');
+    }
+}
+
+function handleManualPromo() {
+    const kode = document.getElementById('kodePromoInput').value.trim().toUpperCase();
+    
+    DISKON_PROMO = 0;
+    kodePromoDiterapkan = null;
+    
+    promoStatusElement.classList.add('d-none');
+    promoStatusElement.classList.remove('text-danger');
+    promoStatusElement.classList.add('text-success');
+    
+    if (!kode) {
+        // Jika input kosong, kembali ke logika otomatis
+        applyOtomatisDiskon();
+        return;
+    }
+    
+    // Logika Promo Manual (Potongan 20rb)
+    if (kode === "KEDAI.UQYSELALUDIHATI") {
+        
+        // Cek kondisi baru: Subtotal Produk harus di atas 50rb
+        if (subtotalProdukGlobal > 50000) {
+            DISKON_PROMO = 20000;
+            kodePromoDiterapkan = kode;
+            promoStatusElement.textContent = `Promo ${kode} berhasil diterapkan! Potongan: ${formatRupiah(DISKON_PROMO)}`;
+            // Sembunyikan info voucher otomatis saat promo manual berhasil diterapkan
+            infoVoucherOtomatisElement.classList.add('d-none'); 
+            promoStatusElement.classList.remove('d-none');
+        } else {
+            // Promo benar, tapi syarat minimum tidak terpenuhi
+            DISKON_PROMO = 0; // Pastikan diskon nol
+            kodePromoDiterapkan = null;
+            promoStatusElement.textContent = `Promo ${kode} gagal diterapkan. Minimum Subtotal Produk untuk promo ini adalah ${formatRupiah(50001)}. Subtotal Anda saat ini: ${formatRupiah(subtotalProdukGlobal)}.`;
+            promoStatusElement.classList.remove('text-success');
+            promoStatusElement.classList.add('text-danger');
+            promoStatusElement.classList.remove('d-none');
+            // Tampilkan info otomatis/default lagi
+            infoVoucherOtomatisElement.classList.remove('d-none'); 
+        }
+        
+    } 
+    else {
+        // Jika kode salah
+        promoStatusElement.textContent = 'Kode promo tidak valid atau sudah kadaluarsa.';
+        promoStatusElement.classList.remove('text-success');
+        promoStatusElement.classList.add('text-danger');
+        
+        // Cek promo otomatis (jika ada promo otomatis, tampilkan statusnya)
+        applyOtomatisDiskon(); 
+        
+        // Jika promo otomatis tidak aktif, tapi ada pesan error manual, tampilkan pesan error manual
+        if (DISKON_PROMO === 0) { 
+             promoStatusElement.classList.remove('d-none');
+             infoVoucherOtomatisElement.classList.remove('d-none');
+        } 
+    }
+    
+    if (DISKON_PROMO > 0 || promoStatusElement.classList.contains('text-danger')) {
+      promoStatusElement.classList.remove('d-none');
+    }
+}
+
+
+function updateKeranjang(){
+  daftarKeranjang.innerHTML='';
+  let subtotalHarga = 0; 
+
+  groupedItems = keranjang.reduce((acc, item) => {
+    const kunci = item.nama + (item.varian ? ` (${item.varian})` : '');
+    if (!acc[kunci]) {
+        acc[kunci] = { ...item, jumlah: 0 };
+    }
+    acc[kunci].jumlah++;
+    return acc;
+  }, {});
+  
+  Object.keys(groupedItems).forEach((kunci) => {
+    const item = groupedItems[kunci];
+    const hargaSatuan = parseHarga(item.harga);
+    const subtotalItem = hargaSatuan * item.jumlah;
+    subtotalHarga += subtotalItem; 
+
+    let namaTampilan = item.nama;
+    if (item.varian) {
+        namaTampilan += ` (${item.varian})`;
+    }
+    
+    const itemCard = document.createElement('div');
+    itemCard.className = 'cart-item-card';
+    itemCard.innerHTML = `
+        <img src="${getProductImage(item.nama)}" alt="${item.nama}">
+        <div class="cart-item-info">
+            <div class="cart-item-name">${namaTampilan}</div>
+            <div class="cart-item-details">
+                ${item.jumlah}x @ ${item.harga} = <span class="fw-bold text-success">${formatRupiah(subtotalItem)}</span>
+            </div>
+        </div>
+        <div class="cart-item-actions">
+            <button class="btn-delete" onclick="hapusItemSemua('${kunci}')">🗑️</button>
+        </div>
+    `;
+    daftarKeranjang.appendChild(itemCard);
+  });
+  
+  subtotalProdukGlobal = subtotalHarga;
+  
+  updateOngkosKirim(); 
+  
+  // Tentukan logika promo
+  if (document.getElementById('kodePromoInput').value.trim()) {
+      handleManualPromo();
+  } else {
+      applyOtomatisDiskon();
+  }
+
+  const totalAkhir = subtotalProdukGlobal + ONGKOS_KIRIM + BIAYA_KEMASAN - DISKON_PROMO;
+  
+  if(keranjang.length > 0){
+    keranjangKosong.classList.add('d-none');
+    btnCheckoutElement.classList.remove('d-none');
+    checkoutFormElement.classList.remove('d-none'); 
+    totalSummaryContainer.classList.remove('d-none');
+    rangkumanPesananTitle.classList.remove('d-none');
+
+    summarySubtotal.textContent = formatRupiah(subtotalProdukGlobal);
+    document.getElementById('summaryKemasan').textContent = formatRupiah(BIAYA_KEMASAN);
+    
+    let diskonRow = document.getElementById('summaryDiskonRow');
+    if (DISKON_PROMO > 0) {
+        if (!diskonRow) {
+            diskonRow = document.createElement('div');
+            diskonRow.id = 'summaryDiskonRow';
+            diskonRow.className = 'summary-row';
+            diskonRow.innerHTML = `
+                <span class="summary-label text-danger">Diskon Promo (${kodePromoDiterapkan})</span>
+                <span class="summary-value text-danger">- ${formatRupiah(DISKON_PROMO)}</span>
+            `;
+            totalSummaryContainer.querySelector('.total-summary').insertBefore(diskonRow, totalSummaryContainer.querySelector('.summary-total'));
+        } else {
+            diskonRow.querySelector('.summary-value').textContent = `- ${formatRupiah(DISKON_PROMO)}`;
+            diskonRow.querySelector('.summary-label').innerHTML = `<span class="summary-label text-danger">Diskon Promo (${kodePromoDiterapkan})</span>`;
+        }
+    } else if (diskonRow) {
+        diskonRow.remove();
+        // Hanya sembunyikan status promo jika tidak ada diskon aktif dan tidak ada pesan error manual
+        if (!promoStatusElement.classList.contains('text-danger')) {
+             promoStatusElement.classList.add('d-none');
+        }
+    }
+    
+    summaryTotalAkhir.textContent = formatRupiah(totalAkhir);
+    
+  } else {
+    keranjangKosong.classList.remove('d-none');
+    btnCheckoutElement.classList.add('d-none');
+    checkoutFormElement.classList.add('d-none'); 
+    totalSummaryContainer.classList.add('d-none');
+    rangkumanPesananTitle.classList.add('d-none');
+    
+    DISKON_PROMO = 0;
+    kodePromoDiterapkan = null;
+    promoStatusElement.classList.add('d-none');
+    infoVoucherOtomatisElement.classList.remove('d-none'); // Pastikan info otomatis muncul saat keranjang kosong
+    if(document.getElementById('summaryDiskonRow')) document.getElementById('summaryDiskonRow').remove();
+  }
+}
+
+function hapusItemSemua(kunciProduk){
+  keranjang = keranjang.filter(item => {
+      const itemKunci = item.nama + (item.varian ? ` (${item.varian})` : '');
+      return itemKunci !== kunciProduk;
+  });
+  updateKeranjang();
+}
+
+document.getElementById('applyPromo').addEventListener('click', () => {
+    handleManualPromo();
+    updateKeranjang();
+});
+
+// 🎯 FUNGSI UNTUK MENGHASILKAN DETAIL PESANAN DI WHATSAPP
+function setCheckoutLink(groupedItems, total, subtotal, ongkir, kemasan, diskon, nama, alamat, metodeBayar) {
+    let detailPesanan = "*🔔 KONFIRMASI PESANAN - kedai.uqy 🔔*\n\n";
+    
+    detailPesanan += "*🏡 Data Pemesan & Pengiriman:*\n";
+    detailPesanan += `Nama: ${nama}\n`;
+    detailPesanan += `Alamat: ${alamat}\n`;
+    detailPesanan += `Metode Bayar: ${metodeBayar}\n`;
+    detailPesanan += "------------------------------\n";
+
+    detailPesanan += "*📦 Detail Item Pesanan:*\n";
+    let index = 1;
+    Object.keys(groupedItems).forEach((kunci) => {
+        const item = groupedItems[kunci];
+        detailPesanan += `${index}. ${item.nama}`;
+        if (item.varian) {
+            detailPesanan += ` (${item.varian})`;
+        }
+        const subtotalItem = parseHarga(item.harga) * item.jumlah;
+        detailPesanan += `\n   Qty: ${item.jumlah}x | Subtotal: ${formatRupiah(subtotalItem)}\n`;
+        index++;
+    });
+    
+    detailPesanan += "------------------------------\n";
+    detailPesanan += "*🧾 Rincian Biaya:*\n";
+    detailPesanan += `Subtotal Produk: ${formatRupiah(subtotal)}\n`;
+    detailPesanan += `Ongkos Kirim: ${formatRupiah(ongkir)}\n`;
+    detailPesanan += `Biaya Kemasan: ${formatRupiah(kemasan)}\n`;
+    if (diskon > 0) {
+        detailPesanan += `Diskon Promo (${kodePromoDiterapkan}): -${formatRupiah(diskon)}\n`;
+    }
+    detailPesanan += "------------------------------\n";
+    detailPesanan += `*💰 TOTAL AKHIR: ${formatRupiah(total)}*`;
+    detailPesanan += `\n\n_Mohon konfirmasi ketersediaan dan alamat pengiriman kepada admin. Terima kasih!_ 🙏`;
+    
+    const whatsappText = encodeURIComponent(detailPesanan);
+    const whatsappNumber = '62895636161980'; 
+    
+    return `https://wa.me/${whatsappNumber}?text=${whatsappText}`;
+}
+
+// 🎯 FUNGSI YANG DIPANGGIL SAAT TOMBOL CHECKOUT DIKLIK
+function konfirmasiCheckout() {
+    const nama = document.getElementById('namaPemesan').value.trim();
+    const alamat = document.getElementById('alamatPengiriman').value.trim();
+    const metodeBayar = document.getElementById('metodePembayaran').value;
+
+    if (!nama || !alamat || !metodeBayar) {
+        alert('Mohon lengkapi semua data Pengiriman & Pembayaran (Nama, Alamat, dan Metode Bayar) sebelum konfirmasi. Field bertanda (*) wajib diisi.');
+        return; 
+    }
+    
+    // Pastikan semua perhitungan terbaru
+    updateOngkosKirim();
+    if (document.getElementById('kodePromoInput').value.trim()) {
+        handleManualPromo();
+    } else {
+        applyOtomatisDiskon();
+    }
+    
+    const totalAkhir = subtotalProdukGlobal + ONGKOS_KIRIM + BIAYA_KEMASAN - DISKON_PROMO;
+
+    const whatsappLink = setCheckoutLink(
+        groupedItems, 
+        totalAkhir, 
+        subtotalProdukGlobal, 
+        ONGKOS_KIRIM, 
+        BIAYA_KEMASAN, 
+        DISKON_PROMO,
+        nama, 
+        alamat, 
+        metodeBayar
+    );
+    // Membuka jendela baru dengan pesan WhatsApp yang sudah terisi
+    window.open(whatsappLink, '_blank');
+}
+
+
+// ==============================================
+// 🚀 INISIALISASI
+// ==============================================
+document.addEventListener('DOMContentLoaded', () => {
+    checkStatusToko();
+    renderProduk(rowTerlaris, produkTerlarisData, 3);
+    renderProduk(rowLainnya, produkLainnyaData, 4); 
+    
+    alamatPengirimanElement.addEventListener('input', updateKeranjang);
+    document.getElementById('kodePromoInput').addEventListener('input', updateKeranjang);
+
+    updateKeranjang();
+});
+
+
+// Kode untuk Modal Logic dan Qty Buttons
+const modalDetail = new bootstrap.Modal(document.getElementById('detailModal'));
+const modalImg = document.getElementById('modalImg');
+const modalNama = document.getElementById('modalNama');
+const modalHarga = document.getElementById('modalHarga');
+const modalDeskripsi = document.getElementById('modalDeskripsi');
+const varianContainer = document.getElementById('varianContainer');
+
+modal.addEventListener('show.bs.modal', e=>{
+  const btn = e.relatedTarget;
+  const nama = btn.getAttribute('data-nama');
+  const harga = btn.getAttribute('data-harga');
+  const img = btn.getAttribute('data-img');
+  const deskripsi = btn.getAttribute('data-deskripsi');
+  const variansString = btn.getAttribute('data-varians');
+  const varians = variansString ? JSON.parse(variansString) : null;
+
+  produkDipilih = {
+    nama: nama,
+    harga: harga,
+    img: img, 
+    deskripsi: deskripsi,
+    varians: varians,
+    qty: 1,
+    varianTerpilih: varians ? varians[0] : null
+  };
+  
+  modalImg.src = produkDipilih.img;
+  modalNama.textContent = produkDipilih.nama;
+  modalHarga.textContent = produkDipilih.harga;
+  modalDeskripsi.textContent = produkDipilih.deskripsi;
+  qtyInput.value = produkDipilih.qty;
+  
+  varianSelect.innerHTML = '';
+  if (varians && varians.length > 0) {
+      varianContainer.classList.remove('d-none');
+      varians.forEach(varian => {
+          const option = document.createElement('option');
+          option.value = varian;
+          option.textContent = varian;
+          varianSelect.appendChild(option);
+      });
+      produkDipilih.varianTerpilih = varians[0]; 
+  } else {
+      varianContainer.classList.add('d-none');
+      produkDipilih.varianTerpilih = null;
+  }
+});
+
+varianSelect.addEventListener('change', (e) => {
+    if (produkDipilih) {
+        produkDipilih.varianTerpilih = e.target.value;
+    }
+});
+
+document.getElementById('qtyPlus').addEventListener('click',()=>{
+  if(produkDipilih){
+    produkDipilih.qty++;
+    qtyInput.value = produkDipilih.qty;
+  }
+});
+document.getElementById('qtyMinus').addEventListener('click',()=>{
+  if(produkDipilih && produkDipilih.qty > 1){
+    produkDipilih.qty--;
+    qtyInput.value = produkDipilih.qty;
+  }
+});
+
+document.getElementById('tambahKeranjang').addEventListener('click',()=>{
+  if (!produkDipilih) return;
+  
+  const itemBaru = {
+      nama: produkDipilih.nama,
+      harga: produkDipilih.harga,
+      varian: produkDipilih.varianTerpilih 
+  };
+  
+  for(let i=0; i < produkDipilih.qty; i++){
+    keranjang.push(itemBaru);
+  }
+  updateKeranjang();
+  modalDetail.hide(); 
+});
+</script>
+</body>
+</html>
