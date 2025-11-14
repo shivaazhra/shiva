@@ -445,8 +445,8 @@ header h1 {
           <label for="metodePembayaran" class="form-label">Metode Pembayaran <span class="text-danger">*</span></label>
           <select class="form-select" id="metodePembayaran" required>
               <option value="" selected disabled>Pilih Metode Pembayaran</option>
-              <option value="Transfer Bank (BCA/Mandiri)">Transfer Bank (BCA/Mandiri)</option>
-              <option value="E-Wallet (Dana/Gopay/OVO)">E-Wallet (Dana/Gopay/OVO)</option>
+              <option value="Transfer Bank (BCA/Mandiri)">Transfer Bank (BCA/BRI,Mandiri)</option>
+              <option value="E-Wallet (Dana/Gopay/OVO)">E-Wallet (Dana/Gopay/OVO,Shopeepay)</option>
               <option value="COD (Bayar di tempat)">COD (Bayar di tempat)</option>
           </select>
       </div>
@@ -582,9 +582,9 @@ function checkStatusToko() {
 // 📦 DATA PRODUK (URL gambar sudah dipastikan unik)
 // ==============================================
 const produkTerlarisData = [
-  {nama:"Ikan Nila Cobek", harga:"Rp 20.000", img:"https://i.imgur.com/aOm72zf.jpeg", deskripsi: "Ikan Nila goreng disajikan dengan sambal cobek pedas khas Sunda.", rating: 4.8, terjual: 156},
+  {nama:"Ikan Nila Cobek", harga:"Rp 40.000", img:"https://i.imgur.com/aOm72zf.jpeg", deskripsi: "Ikan Nila goreng disajikan dengan sambal cobek pedas khas Sunda.", rating: 4.8, terjual: 156},
   {nama:"Ikan Garang Asem", harga:"Rp 35.000", img:"https://i.imgur.com/l7iclkx.jpeg", deskripsi: "Ikan bandeng/patin dimasak kuah santan kaya rempah dengan rasa asam pedas menyegarkan.", rating: 4.5, terjual: 92},
-  {nama:"Acar Ikan Merah", harga:"Rp 20.000", img:"https://i.imgur.com/2LM3DDx.jpeg", deskripsi: "Olahan ikan dengan kuah kuning pedas dan bumbu acar.", rating: 4.7, terjual: 110}
+  {nama:"Acar Ikan Merah", harga:"Rp 40.000", img:"https://i.imgur.com/2LM3DDx.jpeg", deskripsi: "Olahan ikan dengan kuah kuning pedas dan bumbu acar.", rating: 4.7, terjual: 110}
 ];
 
 const produkLainnyaData = [
@@ -594,8 +594,8 @@ const produkLainnyaData = [
   {nama:"Gabin Tape Susu", harga:"Rp 3.000/pcs", img:"https://i.imgur.com/XwYCbAj.jpeg", deskripsi: "Snack tradisional dengan isian tape singkong manis dan susu.", rating: 4.6, terjual: 188},
   {nama:"Risoles", harga:"Rp 20.000", img:"https://i.imgur.com/3Ypkw3V.jpeg", deskripsi: "Risoles fozenfood dengan berbagai pilihan isian (1pack=5pcs)", varians: ["Mayo", "Mentai", "Sayuran"], rating: 4.5, terjual: 140},
   {nama:"Cireng isi", harga:"Rp 20.000", img:"https://i.imgur.com/BukBWmQ.jpeg", deskripsi: "Cireng isi frozenfood cocok untuk cemilan (1pack=5pcs)", varians: ["Ayam Suwir Pedas", "Ayam Suwir Tidak Pedas"], rating: 4.7, terjual: 205},
-  {nama:"Keripik Tempe", harga:"Rp 28.000", img:"https://i.imgur.com/Av2s1ba.jpeg", deskripsi: "Keripik tempe renyah, gurih, dan siap makan.", rating: 4.4, terjual: 85},
-  {nama:"Peyek Rebon", harga:"Rp 30.000", img:"https://i.imgur.com/O4DCBQr.jpeg", deskripsi: "Peyek rebon super renyah yang kaya rasa udang rebon (udang kecil).", rating: 4.8, terjual: 132}
+  {nama:"Keripik Tempe 120gr", harga:"Rp 30.000", img:"https://i.imgur.com/Av2s1ba.jpeg", deskripsi: "Keripik tempe renyah, gurih, dan siap makan.", rating: 4.4, terjual: 85},
+  {nama:"Peyek Rebon 100gr", harga:"Rp 30.000", img:"https://i.imgur.com/O4DCBQr.jpeg", deskripsi: "Peyek rebon super renyah yang kaya rasa udang rebon (udang kecil).", rating: 4.8, terjual: 132}
 ];
 
 const allProdukData = [...produkTerlarisData, ...produkLainnyaData];
