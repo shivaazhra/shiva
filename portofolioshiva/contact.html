@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - [Nama Anda] Portofolio</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;700&display=swap');
+        * { font-family: 'Baloo 2', cursive !important; }
+        body {
+            padding-top: 70px;
+            background: #dfefff; /* Biru muda cerah dari Projects */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* NAVBAR (Warna dan Style dari Projects) */
+        .navbar {
+            background-color: #74b9ff !important; /* Warna Navbar Projects */
+        }
+        .navbar .nav-link,
+        .navbar .navbar-brand {
+            color: #ffffff !important;
+            font-weight: 600;
+        }
+        .navbar .nav-link:hover {
+            color: #003566 !important;
+        }
+
+        /* CONTACT SECTION (Menggunakan gaya yang mirip Project Section) */
+        .contact-section { 
+            margin-top: 50px; /* Sedikit lebih rendah dari Projects */
+            background: white;
+            padding: 40px;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            max-width: 700px; /* Lebar Kartu Formulir */
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        h2 {
+            color: #003566; /* Warna Judul dari Projects */
+            font-weight: 700;
+            font-size: 2.25rem;
+        }
+        .form-control-lg {
+            border-radius: 8px;
+        }
+        
+        /* FOOTER (Warna dan Style dari Projects) */
+        footer {
+            background: #74b9ff;
+            color: white;
+            font-weight: 600;
+            margin-top: auto; /* Memastikan footer selalu di bawah */
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="index.html">Portofolio</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+        <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="container">
+    <div class="contact-section">
+        <h2 class="fw-bold text-center mb-4">Hubungi Saya</h2>
+        <p class="text-center text-muted mb-5">Silakan isi formulir di bawah ini untuk mengirimkan pesan kepada saya.</p>
+
+        <form action="#" method="POST">
+            
+            <div class="mb-4">
+                <label for="nama" class="form-label fw-bold">Nama Lengkap</label>
+                <input type="text" class="form-control form-control-lg" id="nama" name="nama" required>
+            </div>
+            
+            <div class="mb-4">
+                <label for="email" class="form-label fw-bold">Alamat Email</label>
+                <input type="email" class="form-control form-control-lg" id="email" name="email" required>
+            </div>
+            
+            <div class="mb-5">
+                <label for="pesan" class="form-label fw-bold">Pesan Anda</label>
+                <textarea class="form-control form-control-lg" id="pesan" name="pesan" rows="5" required></textarea>
+            </div>
+            
+            <div class="d-grid gap-2 col-8 mx-auto">
+                <button type="submit" class="btn btn-primary btn-lg fw-bold">Kirim Pesan</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer class="text-center p-3 mt-5">
+  © 2024 | Dibuat oleh Shiva Aulia Azahra (32241626)
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
