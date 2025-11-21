@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jejak Bandoeng 🏛️</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            /* --- SKEMA WARNA REVISI: SENADA DENGAN SENJA (EMAS/COKELAT) --- */
+            --color-dark-accent: #994B00; 
+            --color-soft-accent: #FFC759; 
+            --color-light-bg: #FFF9F0; 
+            --color-cream: #FBF6EF; 
+            
+            /* FONT AESTHETIC FORMAL */
+            --font-serif: 'Playfair Display', serif; /* Font judul baru (aesthetic formal) */
+            --font-sans: 'Inter', sans-serif; /* Font teks tubuh baru (aesthetic modern) */
+            --navbar-height: 80px; 
+        }
+
+        body {
+            background-color: var(--color-cream);
+            font-family: var(--font-sans); 
+            line-height: 1.7;
+            color: #333;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--color-dark-accent); 
+            font-family: var(--font-serif); 
+        }
+
+        .navbar-brand, .nav-link {
+            color: white !important;
+            font-weight: 600;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 
+                         0 0 15px rgba(255, 255, 255, 0.5);
+            transition: text-shadow 0.3s ease;
+        }
+
+        /* Perbaikan Scroll Anchor */
+        section[id] {
+            scroll-margin-top: var(--navbar-height); 
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: url('https://i.imgur.com/vW3Uxi9.jpeg') no-repeat center center;
+            background-size: cover;
+            height: 90vh; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden; 
+        }
+        
+        header h1 {
+            font-family: 'Lora', serif; 
+            font-weight: 700;
+            font-size: 3.5rem; 
+            margin-bottom: 5px;
+            text-shadow: 
+                0 0 15px rgba(255, 255, 255, 0.7), 
+                0 0 20px rgba(255, 200, 0, 0.5);   
+            animation: fadeInDown 1.5s ease-out; 
+            color: white; 
+        }
+
+        header p {
+            font-size: 1.1rem; 
+            opacity: 0.95;
+            margin-bottom: 25px;
+            text-shadow: 
+                0 0 10px rgba(255, 255, 255, 0.6); 
+            animation: fadeInUp 2s ease-out; 
+            color: white; 
+        }
+
+        .btn-elegant {
+            background-color: var(--color-dark-accent); 
+            color: white; 
+            font-weight: 700;
+            border: 3px solid white; 
+            padding: 10px 25px; 
+            border-radius: 50px; 
+            letter-spacing: 1px;
+            transition: all 0.4s ease;
+            font-size: 0.9rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            font-family: var(--font-sans); 
+        }
+
+        .btn-elegant:hover {
+            background-color: #7A3C00; 
+            color: white;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* CSS untuk Fullscreen Visual (Portofolio) */
+        .section-fullscreen {
+            min-height: 100vh; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            padding-top: var(--navbar-height); 
+            padding-bottom: 50px; 
+        }
+
+        /* Section Styling Umum */
+        .section-title-elegant {
+            font-family: var(--font-serif); 
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--color-dark-accent); 
+            border-bottom: 3px solid var(--color-soft-accent); 
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        /* Card Umum (Untuk Portofolio dan Spiritual) */
+        .card-elegant {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card-elegant:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-img-top-cover {
+            height: 320px; /* Ditetapkan 320px sesuai Portofolio */
+            object-fit: cover;
+        }
+
+        /* Font untuk Judul Card */
+        .card-body h5 {
+             font-family: var(--font-serif);
+        }
+
+        /* CSS untuk Kuliner */
+        .card-icon-img { 
+            max-width: 100%; 
+            height: 150px; 
+            object-fit: contain; 
+            margin-bottom: 20px; 
+            display: block; 
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 8px; 
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); 
+        }
+
+        /* ===================================================================
+        CSS KHUSUS DESTINASI TENANG (WISATA) - KARTU FOTO MINI (Tinggi 140px)
+        ===================================================================
+        */
+        .wisata-card {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background-color: white;
+            height: 100%; 
+            border: 1px solid rgba(153, 75, 0, 0.1);
+        }
+
+        .wisata-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .wisata-card-img {
+            height: 140px; /* Tinggi gambar dibuat mini */
+            object-fit: cover; 
+            width: 100%;
+        }
+
+        .wisata-card-body {
+            padding: 15px; /* Padding dikurangi */
+            text-align: center;
+        }
+
+        .wisata-card-body h5 {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            color: var(--color-dark-accent);
+            margin-bottom: 5px; 
+            font-size: 1.1rem; /* Ukuran judul dikurangi */
+        }
+
+        .wisata-card-body p {
+            font-size: 0.85rem; /* Ukuran teks deskripsi dikurangi */
+            color: #666;
+            margin-bottom: 0;
+        }
+        /* ===================================================================
+        AKHIR CSS KHUSUS DESTINASI TENANG
+        ===================================================================
+        */
+
+        /* Quote Style for Sejarah */
+        .blockquote-elegant {
+            font-family: var(--font-serif); 
+            font-size: 1.2rem;
+            font-style: italic;
+            border-left: 5px solid var(--color-soft-accent); 
+            padding-left: 15px;
+            margin-top: 20px;
+            color: #555;
+        }
+        
+        .quote-cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.8rem;
+            font-style: normal;
+            color: var(--color-dark-accent); 
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--color-dark-accent); 
+            color: white;
+            font-family: var(--font-sans);
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand" href="#">Jejak Bandoeng 🏛️</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#portofolio">VISUAL</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#sejarah">SEJARAH</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#kuliner">KULINER</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#wisata">WISATA</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#keagamaan">SPIRITUAL</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <header class="shadow-lg">
+        <div class="container header-content text-white text-center"> 
+            <h1>Pesona Heritage yang Tak Lekang Waktu</h1>
+            <p>Jelajahi kisah arsitektur, kuliner khas, dan destinasi spiritual yang membentuk jati diri Kota Parahyangan.</p>
+            <a href="#portofolio" class="btn btn-elegant mt-2">
+                Mulai Jelajah <i class="fas fa-route ms-2"></i>
+            </a>
+        </div>
+    </header>
+
+    <section id="portofolio" class="container py-5 section-fullscreen">
+        <h2 class="section-title-elegant text-center mb-5">Potret Jejak Bandoeng 📸</h2>
+        <div class="row g-4 flex-grow-1 align-items-center">
+            <div class="col-lg-4 col-md-6">
+                <div class="card card-elegant bg-light h-100">
+                    <img src="https://i.imgur.com/kwxei3R.jpeg" class="card-img-top-cover" alt="Jalan Braga">
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold mb-2" style="color: var(--color-dark-accent);">Jalan Braga</h5>
+                        <p class="card-text mb-0">
+                            <small class="text-muted"><i class="fas fa-street-view me-1"></i> Cerminan "Paris van Java" dengan jejak bangunan bersejarah yang menawan.</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card card-elegant bg-light h-100">
+                    <img src="https://i.imgur.com/zFU4N7w.jpeg" class="card-img-top-cover" alt="Gedung Sate">
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold mb-2" style="color: var(--color-dark-accent);">Gedung Sate</h5>
+                        <p class="card-text mb-0">
+                            <small class="text-muted"><i class="fas fa-map-pin me-1"></i> Ikon arsitektur kolonial Art Deco, pusat pemerintahan Jawa Barat.</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card card-elegant bg-light h-100">
+                    <img src="https://i.imgur.com/ya76Zxs.jpeg" class="card-img-top-cover" alt="Kawah Putih">
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold mb-2" style="color: var(--color-dark-accent);">Kawah Putih</h5>
+                        <p class="card-text mb-0">
+                            <small class="text-muted"><i class="fas fa-mountain me-1"></i> Danau kawah vulkanik dengan air berwarna putih kehijauan yang eksotis.</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container"><hr class="text-secondary"></div>
+
+    <section id="sejarah" class="container py-5 bg-white shadow-sm rounded-3 my-5">
+        <h2 class="section-title-elegant text-center mb-4">Sejarah & Filosofi 📜</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <p class="text-center lead">Bandung adalah kota yang dibangun di atas tiga pilar sejarah: kolonialisme, kemerdekaan Asia-Afrika, dan kearifan Sunda.</p>
+                <ul class="list-group list-group-flush mb-4">
+                    <li class="list-group-item">
+                        <i class="fas fa-landmark me-2" style="color: var(--color-dark-accent);"></i> 1810 - Didirikan secara resmi oleh Daendels sebagai ibu kota kabupaten di tepi Sungai Cikapundung.
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-globe me-2" style="color: var(--color-dark-accent);"></i> Awal Abad ke-20 - Parijs van Java berkembang pesat dengan arsitektur Art Deco yang indah, mendapatkan julukan "Parijs van Java".
+                    </li>
+                    <li class="list-group-item">
+                        <i class="fas fa-handshake me-2" style="color: var(--color-dark-accent);"></i> 1955 - KAA menjadi tuan rumah Konferensi Asia-Afrika, melahirkan Dasasila Bandung, menjadikannya simbol solidaritas bangsa-bangsa dan perjuangan melawan kolonialisme.
+                    </li>
+                </ul>
+                <div class="blockquote-elegant mx-auto">
+                    "Semangat Dasasila Bandung, yang lahir dari Konferensi Asia-Afrika, menjadikan kota ini sebagai simbol kemerdekaan dan persatuan bangsa-bangsa dunia."
+                    <cite class="quote-cite">— Sejarawan Lokal</cite>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container"><hr class="text-secondary"></div>
+
+    <section id="kuliner" class="container py-5">
+        <h2 class="section-title-elegant text-center mb-5">Kuliner Rasa Lokal 🍜</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card card-elegant h-100 bg-light">
+                    <div class="card-body text-center">
+                        <img src="https://i.imgur.com/VPuRmw7.jpeg" alt="Warung Nasi Bu Imas" class="card-icon-img">
+                        <h5 class="fw-bold" style="color: var(--color-dark-accent);">Warung Nasi Bu Imas</h5>
+                        <ul class="list-unstyled text-start small mt-3">
+                            <li class="mb-1"><i class="fas fa-utensils me-2" style="color: var(--color-soft-accent);"></i> Ikon Kuliner: Nasi Komplit Khas Sunda</li>
+                            <li class="mb-1"><i class="fas fa-calendar-alt me-2" style="color: var(--color-soft-accent);"></i> Berdiri Sejak: 1980</li>
+                            <li class="mb-1"><i class="fas fa-map-marker-alt me-2" style="color: var(--color-soft-accent);"></i> Lokasi Utama: Jalan Pungkur, Bandung (4 Cabang)</li>
+                        </ul>
+                        <p class="small text-start mt-3">Terkenal dengan karedok leunca, sambal dadak otentik, dan ayam bakar khas Sunda yang legendaris.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-elegant h-100 bg-light">
+                    <div class="card-body text-center">
+                        <img src="https://i.imgur.com/h03awLb.jpeg" alt="Ronde Jahe Alkateri " class="card-icon-img">
+                        <h5 class="fw-bold" style="color: var(--color-dark-accent);">Ronde Jahe Alkateri</h5>
+                        <ul class="list-unstyled text-start small mt-3">
+                            <li class="mb-1"><i class="fas fa-coffee me-2" style="color: var(--color-soft-accent);"></i>Ikon Kuliner: Ronde Jahe Hangat Rempah</li>
+                            <li class="mb-1"><i class="fas fa-calendar-alt me-2" style="color: var(--color-soft-accent);"></i> Berdiri Sejak: 1984</li>
+                            <li class="mb-1"><i class="fas fa-map-marker-alt me-2" style="color: var(--color-soft-accent);"></i> Lokasi Utama: Jalan Alkateri, Bandung (13 Cabang)</li>
+                        </ul>
+                        <p class="small text-start mt-3">Dikenal dengan kuah jahe yang pedas hangat, cocok untuk cuaca dingin Bandung.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-elegant h-100 bg-light">
+                    <div class="card-body text-center">
+                        <img src="https://i.imgur.com/fMrZILw.jpeg" alt="Mie Kocok Mang Dadeng" class="card-icon-img">
+                        <h5 class="fw-bold" style="color: var(--color-dark-accent);">Mie Kocok Mang Dadeng</h5>
+                        <ul class="list-unstyled text-start small mt-3">
+                            <li class="mb-1"><i class="fas fa-drumstick-bite me-2" style="color: var(--color-soft-accent);"></i>Ikon Kuliner: Mie Kocok Kikil Sapi</li>
+                            <li class="mb-1"><i class="fas fa-calendar-alt me-2" style="color: var(--color-soft-accent);"></i> Berdiri Sejak: 1953</li>
+                            <li class="mb-1"><i class="fas fa-map-marker-alt me-2" style="color: var(--color-soft-accent);"></i> Lokasi Utama: Jl. K.H. Ahmad Dahlan, Bandung</li>
+                        </ul>
+                        <p class="small text-start mt-3">Istimewa dengan kikil tebal, kuah kaldu sapi gurih, dan perasan jeruk nipis yang segar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="container"><hr class="text-secondary"></div>
+
+    <section id="wisata" class="container py-5">
+        <h2 class="section-title-elegant text-center mb-5">Destinasi 🏞️</h2>
+        <div class="row g-4">
+            
+           <div class="col-lg-4 col-md-6">
+                <div class="card card-elegant bg-light h-100">
+                    <img src="https://i.imgur.com/kAVAylQ.png" class="card-img-top-cover" alt="Kebon Begonia Lembang">
+                    <div class="card-body text-center">
+                        <h5 class=></i> Kebon Begonia Lembang</h5>
+                        <p class="card-text mb-0">
+                            <small class="text-muted">Menawarkan hamparan bunga Begonia yang indah. Dilengkapi spot foto instagramable seperti rumah hobbit, kincir angin, dan jembatan cinta.</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card card-elegant bg-light h-100">
+                    <img src="https://i.imgur.com/m428MoG.png" class="card-img-top-cover" alt="Lembang Park & Zoo">
+                    <div class="card-body text-center">
+                        <h5 class=></i> Lembang Park Zoo</h5>
+                        <p class="card-text mb-0">
+                            <small class="text-muted">Destinasi wisata edukatif dan rekreasi keluarga di Lembang. Pengunjung dapat berinteraksi dengan beragam satwa, serta menikmati wahana dan kafe tematik.</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card card-elegant bg-light h-100">
+                    <img src="https://i.imgur.com/N1MpNp7.png" class="card-img-top-cover" alt="Dusun Bambu Lembang">
+                    <div class="card-body text-center">
+                        <h5 class=>Dusun Bambu Lembang</h5>
+                        <p class="card-text mb-0">
+                            <small class="text-muted">Tempat wisata dengan keindahan alam yang dipadukan suasana tradisional Sunda. Ikon utamanya adalah danau kecil, serta menawarkan pilihan menginap di villa atau glamping.</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <div class="container"><hr class="text-secondary"></div>
+
+    <section id="keagamaan" class="container py-5">
+        <h2 class="section-title-elegant text-center mb-5">Jejak Spiritual 🧘</h2>
+        <div class="row g-4">
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card card-elegant bg-light h-100">
+                    <img src="https://i.imgur.com/Psimlzq.jpeg" class="card-img-top-cover" alt="Masjid Raya Bandung">
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold mb-2" style="color: var(--color-dark-accent);"><i class="fas fa-mosque me-1" style="color: var(--color-soft-accent);"></i> Masjid Raya Bandung</h5>
+                        <p class="card-text mb-0">
+                            <small class="text-muted">Keagungan arsitektur modern di pusat kota. Simbol kerukunan umat beragama.</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card card-elegant bg-light h-100">
+                    <img src="https://i.imgur.com/4y1yBWv.jpeg" class="card-img-top-cover" alt="Gereja Katedral St. Petrus">
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold mb-2" style="color: var(--color-dark-accent);"><i class="fas fa-church me-1" style="color: var(--color-soft-accent);"></i> Gereja Katedral St. Petrus</h5>
+                        <p class="card-text mb-0">
+                            <small class="text-muted">Menawarkan kedamaian dengan arsitektur neo-Gotik yang bersejarah di Braga.</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-6">
+                <div class="card card-elegant bg-light h-100">
+                    <img src="https://i.imgur.com/fu6hiX5.jpeg" class="card-img-top-cover" alt="Vihara Vipassana Graha">
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold mb-2" style="color: var(--color-dark-accent);"><i class="fas fa-bahai me-1" style="color: var(--color-soft-accent);"></i> Vihara Vipassana Graha</h5>
+                        <p class="card-text mb-0">
+                            <small class="text-muted">Tempat meditasi yang asri dan tenang di Lembang, jauh dari hiruk pikuk kota.</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="text-center py-4 mt-5">
+        <div class="container">
+            <p>&copy; 2025 Jejak Bandoeng | Dibuat dengan semangat elegan dan sejuk.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
